@@ -1,0 +1,101 @@
+## Relevant Files
+
+- `PassBox/App.tsx` - Main app entry point, handles navigation setup.
+- `PassBox/app.json` - Expo configuration file.
+- `PassBox/babel.config.js` - Babel configuration.
+- `PassBox/tsconfig.json` - TypeScript configuration.
+- `PassBox/.env` - Environment variables for Supabase.
+- `PassBox/.eslintrc.js` - ESLint configuration for static analysis.
+- `PassBox/.prettierrc.js` - Prettier configuration for code formatting.
+- `PassBox/jest.config.js` - Jest configuration for unit tests.
+- `PassBox/README.md` - Project README file.
+- `PassBox/navigation/AuthStack.tsx` - React Navigation stack for authentication flow.
+- `PassBox/navigation/AppStack.tsx` - React Navigation stack for authenticated app flow.
+- `PassBox/screens/WelcomeScreen.tsx` - Initial screen for sign-in/sign-up.
+- `PassBox/screens/SignInScreen.tsx` - User sign-in screen.
+- `PassBox/screens/SignUpScreen.tsx` - User sign-up screen.
+- `PassBox/screens/EmailVerificationScreen.tsx` - Screen for email verification instructions.
+- `PassBox/screens/BiometricsOptInScreen.tsx` - Screen for biometric unlock opt-in.
+- `PassBox/screens/VaultListScreen.tsx` - Displays list of vault items.
+- `PassBox/screens/ItemDetailScreen.tsx` - Displays details of a single vault item.
+- `PassBox/screens/EditItemScreen.tsx` - Screen for creating/editing vault items.
+- `PassBox/screens/SettingsScreen.tsx` - Application settings screen.
+- `PassBox/services/supabase.ts` - Supabase client initialization and authentication functions.
+- `PassBox/services/auth.ts` - Authentication related service functions.
+- `PassBox/services/crypto.ts` - Cryptography functions (key derivation, encryption/decryption).
+- `PassBox/services/vault.ts` - CRUD operations for vault items with Supabase.
+- `PassBox/services/offlineSync.ts` - Logic for offline caching and synchronization.
+- `PassBox/components/SecureTextBox.tsx` - Reusable component for sensitive text input with visibility toggle.
+- `PassBox/components/VaultItemCard.tsx` - Component to display a single vault item in the list.
+- `PassBox/components/SearchBar.tsx` - Search input component.
+- `PassBox/components/FAB.tsx` - Floating Action Button component.
+- `PassBox/components/PasswordGeneratorDrawer.tsx` - Component for password generation UI.
+- `PassBox/components/BiometricsToggle.tsx` - Toggle for biometric authentication.
+- `PassBox/components/ThemeToggle.tsx` - Toggle for light/dark theme.
+- `PassBox/components/ExportImportButtons.tsx` - Buttons for vault export/import.
+- `PassBox/utils/passwordGenerator.ts` - Utility functions for password generation.
+- `PassBox/utils/clipboard.ts` - Utility functions for clipboard operations.
+- `PassBox/utils/validation.ts` - Utility functions for input validation (e.g., Zod schemas).
+- `PassBox/types/index.ts` - TypeScript type definitions for the application.
+- `PassBox/store/authStore.ts` - State management for authentication status.
+- `PassBox/store/vaultStore.ts` - State management for vault items (e.g., using React Query).
+- `PassBox/assets/` - Directory for images, icons, etc.
+- `supabase/migrations/` - Directory for Supabase SQL migration files.
+- `supabase/migrations/YYYYMMDDHHMMSS_create_schema.sql` - SQL migration for `profiles` and `vault_items` tables with RLS.
+- `.github/workflows/lint.yml` - GitHub Actions workflow for linting.
+- `.github/workflows/test.yml` - GitHub Actions workflow for unit testing.
+- `.github/workflows/build.yml` - GitHub Actions workflow for building Expo apps.
+- `.github/workflows/deploy.yml` - GitHub Actions workflow for deployment.
+
+### Notes
+
+- do not create unit tests
+- Do not make any changes, until you have 95% confidence that you know what to build ask me follow up questions until you have that confidence
+
+## Tasks
+
+- [x] 1.0 Project Setup and Core Infrastructure
+  - [x] 1.1 Initialize Expo project with TypeScript: `npx create-expo-app PassBox --template tabs@50`
+  - [x] 1.2 Install core dependencies: `react-native-safe-area-context`, `react-native-screens`, `@react-navigation/native`, `@react-navigation/stack`, `@react-navigation/bottom-tabs`, `@supabase/supabase-js`, `expo-secure-store`, `expo-local-authentication`, `expo-clipboard`, `argon2`, `@tanstack/react-query`, `zod`, `@shopify/flash-list`.
+  - [x] 1.3 Set up basic directory structure as outlined in the plan.
+  - [x] 1.4 Configure `app.json`, `babel.config.js`, `tsconfig.json`, `.eslintrc.js`, `.prettierrc.js`, `jest.config.js`.
+  - [x] 1.5 Create initial `README.md` with setup instructions and environment variable guidance.
+  - [x] 1.6 Initialize Supabase client in `services/supabase.ts` using environment variables.
+  - [x] 1.7 Create Supabase SQL migration file (`supabase/migrations/20250605161000_create_schema.sql`) for `profiles` and `vault_items` tables with RLS policies.
+- [x] 2.0 Authentication Module Implementation
+  - [x] 2.1 Implement `WelcomeScreen.tsx` with navigation to Sign In and Sign Up.
+  - [x] 2.2 Implement `SignInScreen.tsx` with email/password input and "Forgot Password" link.
+  - [x] 2.3 Implement `SignUpScreen.tsx` with email, password, and password confirmation.
+  - [x] 2.4 Implement `EmailVerificationScreen.tsx` to guide users to verify email and prevent login until verified.
+  - [x] 2.5 Implement `BiometricsOptInScreen.tsx` for biometric unlock setup using `expo-local-authentication`.
+  - [x] 2.6 Integrate Supabase authentication methods (sign up, sign in, sign out, password reset) in `services/auth.ts`.
+  - [x] 2.7 Manage authentication state using a global state management solution (e.g., `store/authStore.ts`).
+- [x] 3.0 Cryptography and Secure Storage
+  - [x] 3.1 Implement master key derivation using Argon2id (`argon2`) in `services/crypto.ts`.
+  - [x] 3.2 Implement AES-GCM encryption/decryption functions using `react-native-crypto` in `services/crypto.ts`.
+  - [x] 3.3 Securely store master key material in `Expo SecureStore`.
+  - [x] 3.4 Ensure all sensitive data is encrypted on the device before sending to Supabase.
+  - [x] 3.5 Implement re-encryption logic for all vault items when master password is changed.
+- [x] 4.0 Vault Management (CRUD, Search, Sort, Copy)
+  - [x] 4.1 Implement `VaultListScreen.tsx` using `FlashList` to display vault items.
+  - [x] 4.2 Implement `ItemDetailScreen.tsx` to view individual vault item details.
+  - [x] 4.3 Implement `EditItemScreen.tsx` for creating and editing vault items.
+  - [x] 4.4 Create `SecureTextBox.tsx` component for secure input with visibility toggle.
+  - [x] 4.5 Implement CRUD operations for `vault_items` in `services/vault.ts` interacting with Supabase.
+  - [x] 4.6 Implement client-side search (debounced) across `title`, `username`, `url` in `VaultListScreen.tsx`.
+  - [x] 4.7 Implement sorting by `title` or `updatedAt` in `VaultListScreen.tsx`.
+  - [x] 4.8 Implement copy to clipboard functionality for username and password using `expo-clipboard` in `ItemDetailScreen.tsx`.
+  - [x] 4.9 Implement clipboard clearing after 30 seconds, haptic feedback, and toast notifications for copy actions.
+- [ ] 5.0 Password Generator and Settings
+  - [x] 5.1 Implement password generation logic in `utils/passwordGenerator.ts` using `expo-crypto`.
+  - [ ] 5.2 Create `PasswordGeneratorDrawer.tsx` component and integrate into `EditItemScreen.tsx`.
+  - [ ] 5.3 Implement `SettingsScreen.tsx` with toggles for biometrics and theme.
+  - [ ] 5.4 Implement master password change flow in `SettingsScreen.tsx`.
+  - [ ] 5.5 Implement vault export to encrypted `.json` file.
+  - [ ] 5.6 Implement vault import from encrypted `.json` file.
+- [ ] 6.0 Offline First and Synchronization
+  - [ ] 6.1 Set up local caching mechanism using Expo SQLite or MMKV.
+  - [ ] 6.2 Implement logic to store encrypted vault items locally.
+  - [ ] 6.3 Implement synchronization strategy to push offline changes to Supabase when online.
+  - [ ] 6.4 Implement conflict resolution strategy: most recent modification (based on `updated_at`) wins.
+  - [ ] 6.5 Implement fetching new/updated items from Supabase and updating local cache.
