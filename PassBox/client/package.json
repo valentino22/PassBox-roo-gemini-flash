@@ -29,7 +29,7 @@
     "expo-haptics": "~12.8.1",
     "expo-linking": "~6.2.2",
     "expo-local-authentication": "^16.0.4",
-    "expo-router": "~3.4.10",
+    "expo-router": "~3.5.24",
     "expo-secure-store": "^14.2.3",
     "expo-splash-screen": "~0.26.5",
     "expo-status-bar": "~1.11.1",
